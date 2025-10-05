@@ -2,6 +2,7 @@
 source ./common.sh
 check_root
 setup_logging
+
 dnf install rabbitmq-server -y &>>$log_file
 validate $? "installing rabbitmq"
 
