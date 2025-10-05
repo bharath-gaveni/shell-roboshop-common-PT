@@ -80,16 +80,16 @@ systemd_setup() {
         echo -e "user already exists $Y SKIPPING $N"
     fi
     
-    cp $Dir_name/$name.service /etc/systemd/system/$name.service
+    cp $Dir_name/$name.service /etc/systemd/system/$name.service &>>$log_file
     validate $? "copying the sysyemd $name service file"
     
-    systemctl daemon-reload
+    systemctl daemon-reload &>>$log_file
     validate $? "Daemon-reload"
     
-    systemctl enable $name
+    systemctl enable $name &>>$log_file
     validate $? "enabling $name"
     
-    systemctl start $name
+    systemctl start $name &>>$log_file
     validate $? "start $name"
     
 }
