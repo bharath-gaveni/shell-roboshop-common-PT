@@ -35,6 +35,6 @@ validate() {
 print_time() {
     end_time=$(date +%s)
     total_time=$(($end_time-$start_time))
-    echo "Total time taken to execute the script is $total_time seconds" | tee -a $log_file
+    echo "Total time taken to execute the script $0 is $total_time seconds" | tee -a $log_file
 }
 
