@@ -32,6 +32,68 @@ validate() {
     fi
 }
 
+app_setup() {
+    
+    mkdir /app &>>$log_file
+    validate $? "creating app directory"
+    
+    curl -o -L /tmp/$name.zip https://roboshop-artifacts.s3.amazonaws.com/$name-v3.zip &>>$log_file
+    validate  $? "dowloading $name code to temp direc location"
+    
+    cd /app &>>$log_file
+    validate $? "changing to app directory"
+    
+    rm -rf /app/* &>>$log_file
+    validate $? "removing the existing code"
+    
+    unzip /tmp/$name.zip &>>$log_file
+    validate $? "unzipping the $name code in to app dir location"
+    
+    cd /app &>>$log_file
+    validate $? "changing to app directory"
+}
+
+nodejs_setup() {
+    dnf module disable nodejs -y &>>$log_file
+    validate $? "Disabling nodejs"
+    
+    dnf module enable nodejs:20 -y &>>$log_file
+    validate $? "enabling nodejs:20"
+    
+    dnf install nodejs -y &>>$log_file
+    validate $? "installing nodejs"
+    
+    npm install &>>$log_file
+    validate $? "installing dependencies"
+}
+
+
+
+
+
+
+systemd_setup() {
+    id roboshop &>>$log_file
+    if [ $? -ne 0 ]; then
+        useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log_file
+    else
+        echo -e "user already exists $Y SKIPPING $N"
+    fi
+    
+    cp $Dir_name/$name.service /etc/systemd/system/$name.service
+    validate $? "copying the sysyemd $name service file"
+    
+    systemctl daemon-reload
+    validate $? "Daemon-reload"
+    
+    systemctl enable $name
+    validate $? "enabling $name"
+    
+    systemctl start $name
+    validate $? "start $name"
+    
+}
+
 print_time() {
     end_time=$(date +%s)
     total_time=$(($end_time-$start_time))

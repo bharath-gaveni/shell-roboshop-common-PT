@@ -17,7 +17,7 @@ sed -i -e 's/127.0.0.1/0.0.0.0/' -e '/protected-mode/ c protected-mode no' /etc/
 validate $? "Allowing remote connections to redis and updated protected mode from yes to no"
 
 systemctl enable redis &>>$log_file
-validate $? "eanbling redis"
+validate $? "enabling redis"
 
 systemctl start redis &>>$log_file
 validate $? "start redis"
