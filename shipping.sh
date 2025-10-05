@@ -19,7 +19,7 @@ if [ $? -ne 0 ]; then
     mysql -h $mysql_Host_name -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$log_file
     echo -e "$G data is loaded succesfully $N" | tee -a $log_file
 else
-    echo "Data is already is loaded $Y SKIPPING $N" | tee -a $log_file
+    echo -e "Data is already is loaded $Y SKIPPING $N" | tee -a $log_file
 fi
 
 systemctl restart $name &>>$log_file
