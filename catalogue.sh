@@ -1,7 +1,7 @@
 #!/bin/bash
 source ./common.sh
 name=catalogue
-$Dir_name=$PWD
+Dir_name=$PWD
 mongodb_Host_name=mongodb.bharathgaveni.fun
 check_root
 setup_logging
