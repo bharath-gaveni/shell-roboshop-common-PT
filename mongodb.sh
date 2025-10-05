@@ -2,6 +2,7 @@
 source ./common.sh
 
 check_root
+setup_logging
 
 cp $Dir_name/mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
 validate $? "copying mongo repo"

@@ -17,6 +17,12 @@ log_folder=/var/log/shell-roboshop-common-PT
 script_name=$(echo $0 | cut -d "." -f1)
 log_file=$log_folder/$script_name.log
 
+setup_logging(){
+    mkdir -p $log_folder
+    start_time=$(date +%s)
+    echo "script $0 execution started at time: $(date)" | tee -a $log_file
+}
+
 validate() {
     if [ $1 -ne 0 ]; then
         echo -e "$2 is $R Failed $N"
@@ -25,11 +31,6 @@ validate() {
         echo -e "$2 is $G Success $N"
     fi
 }
-
-mkdir -p $log_folder
-start_time=$(date +%s)
-echo "script $0 execution started at time: $(date)" | tee -a $log_file
-
 
 print_time() {
     end_time=$(date +%s)
