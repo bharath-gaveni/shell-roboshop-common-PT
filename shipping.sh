@@ -19,5 +19,6 @@ if [ $? -ne 0 ]; then
 else
     echo "Shipping data is already loaded"
 fi  
-restart_app
+systemctl restart $name
+validate $? "restarting the app"
 print_time
