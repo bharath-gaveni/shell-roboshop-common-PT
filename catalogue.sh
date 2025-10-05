@@ -22,6 +22,6 @@ if [ $index -le 0 ]; then
 else
     echo -e "data is already loaded $Y SKIPPING $N" | tee -a $log_file
 fi
-
+print_time
 
 
