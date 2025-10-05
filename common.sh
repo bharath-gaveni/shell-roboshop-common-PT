@@ -34,7 +34,7 @@ validate() {
 
 app_setup() {
     
-    mkdir /app &>>$log_file
+    mkdir -p /app &>>$log_file
     validate $? "creating app directory"
     
     curl -L -o /tmp/$name.zip https://roboshop-artifacts.s3.amazonaws.com/$name-v3.zip &>>$log_file
