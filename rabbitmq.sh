@@ -1,8 +1,10 @@
 #!/bin/bash
 source ./common.sh
+Dir_name=$PWD
 check_root
 setup_logging
 
+cp $Dir_name/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 dnf install rabbitmq-server -y &>>$log_file
 validate $? "installing rabbitmq"
 
