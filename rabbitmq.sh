@@ -18,10 +18,10 @@ USER_NAME="roboshop"
 USER_PASS="roboshop123"
 rabbitmqctl list_users | grep -w "$USER_NAME" &>>$log_file
 if [ $? -ne 0 ]; then
-    rabbitmqctl add_user $USER_NAME $USER_PASS
+    rabbitmqctl add_user $USER_NAME $USER_PASS &>>$log_file
     validate $? "adding username and password"
 else
-    echo "username is already exists $Y SKIPPING $N" | tee -a $log_file
+    echo -e "username is already exists $Y SKIPPING $N" | tee -a $log_file
 fi
 
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
