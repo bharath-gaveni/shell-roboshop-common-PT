@@ -1,7 +1,7 @@
 #!/bin/bash
 source ./common.sh
 check_root
-systemd_setup
+setup_logging
 
 dnf install mysql-server -y &>>$log_file
 validate $? "installing mysql"
