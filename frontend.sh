@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./common.sh
 N="\e[0m"
 R="\e[0;31m"
 G="\e[0;32m"
@@ -12,6 +13,7 @@ check_root() {
         exit 1
     fi
 }
+check_root
 
 log_folder=/var/log/shell-roboshop-common-PT
 script_name=$(echo $0 | cut -d "." -f1)
@@ -22,6 +24,8 @@ setup_logging(){
     start_time=$(date +%s)
     echo "script $0 execution started at time: $(date)" | tee -a $log_file
 }
+
+setup_logging
 
 validate() {
     if [ $1 -ne 0 ]; then
@@ -62,4 +66,4 @@ validate $? "copying the nginx.conf for reverse proxy"
 systemctl restart nginx &>>$log_file
 validate $? "restarting nginx"
 
-
+print_time
