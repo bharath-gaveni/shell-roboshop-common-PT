@@ -1,8 +1,7 @@
 #!/bin/bash
 source ./common.sh
-name=user
-Dir_name=$PWD
-
+name=cart
+$Dir_name=$PWD
 check_root
 setup_logging
 app_setup
