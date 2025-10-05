@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./common.sh
 name=payment
 Dir_name=$PWD
 check_root
