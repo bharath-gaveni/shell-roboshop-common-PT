@@ -67,10 +67,24 @@ nodejs_setup() {
     validate $? "installing dependencies"
 }
 
+java_setup() {
+    dnf install maven -y &>>$log_file
+    validate $? "installing maven"
+    
+    mvn clean package &>>$log_file
+    validate $? "installing dependencies"
+    
+    mv target/shipping-1.0.jar shipping.jar &>>$log_file
+    validate $? "moving the shipping.jar from target folder to app directory"
+}
 
+python_setup() {
+    dnf install python3 gcc python3-devel -y
+    validate $? "installing python"
 
-
-
+    pip3 install -r requirements.txt
+    validate $? "installing dependencies"
+}
 
 systemd_setup() {
     id roboshop &>>$log_file
@@ -91,7 +105,7 @@ systemd_setup() {
     
     systemctl start $name &>>$log_file
     validate $? "start $name"
-    
+
 }
 
 print_time() {
